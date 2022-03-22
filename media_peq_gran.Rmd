@@ -1,0 +1,15 @@
+Pequenas e grandes amostras, espera se uma media de 3,5
+Amostra pequena
+```{r}
+set.seed(123)
+```
+
+```{r}
+x = sample(1:6,6, replace = T)
+mean(x)
+```
+Grande amostra
+```{r}
+x = sample(1:6, 1000, replace = T)
+mean(x)
+```

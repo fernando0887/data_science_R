@@ -1,0 +1,28 @@
+```{r}
+install.packages('TeachingSampling')
+library('TeachingSampling')
+```
+Amostra sistemática de tamanho 150 com 10 grupos
+```{r}
+amostra_i = S.SY(150,10)
+amostra_i
+```
+Tamanho da amostra
+```{r}
+dim(amostra_i)
+```
+Usando dataset Iris
+```{r}
+amostra_iris = iris[amostra_i,]
+
+```
+Verificando
+```{r}
+amostra_iris
+
+```
+Tamanho da amostra
+```{r}
+dim(amostra_iris)
+```
+

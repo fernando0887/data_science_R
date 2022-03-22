@@ -1,0 +1,28 @@
+```{r}
+#import dados,string vazio como NA,string como fatores
+
+dados = read.csv('Churn.csv', sep = ';', na.strings ='', stringsAsFactors =T)
+head(dados)
+summary(dados)
+```
+
+
+```{r}
+#dar nome corretos as colunas
+colnames(dados)= c('ID','Score','Estado','Genero','Idade','Patrimonio','Saldo','Produtos','Tem_Cartao','Ativo','Salário','Saiu')
+head(dados)
+```
+
+
+```{r}
+#explorar dados, colunas categoricas
+#Estados
+counts = table(dados$Estados)
+barplot(counts, main='Estados', xlab='Estados')
+#Generos
+counts = table(dados$Genero)
+barplot(counts, main = 'Generos', xlab = 'Generos')
+```
+
+
+```{r}

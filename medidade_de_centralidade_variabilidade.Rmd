@@ -1,0 +1,35 @@
+Dados de entrada, exemplo jogadores
+```{r}
+jogadores = c(400,500,600,700,900,1000)
+```
+média
+```{r}
+mean(jogadores)
+```
+mediana
+```{r}
+median(jogadores)
+```
+moda
+```{r}
+mode(jogadores)
+```
+quartis
+```{r}
+quartis = quantile(jogadores)
+quartis
+```
+terceiro quartil acessado passando o indice
+```{r}
+quartis[4]
+```
+desvio padrão
+```{r}
+sd(jogadores)
+```
+Resumo
+```{r}
+summary(jogadores)
+```
+
+

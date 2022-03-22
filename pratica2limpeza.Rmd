@@ -1,0 +1,42 @@
+```{r}
+dados = read.csv('tempo.csv', sep =';', na.strings = '', stringsAsFactors = T)
+dados
+```
+
+```{r}
+summary(dados)
+```
+```{r}
+#tratar aparencia
+#summary(dados$Aparencia)
+#transformando o valor menos na mediana sol
+dados[dados$Aparencia == 'menos',]$Aparencia = 'sol'
+summary(dados$Aparencia)
+
+```
+```{r}
+#substituir valor fora da curva pela mediana da temperatura 73,5f
+dados[dados$Temperatura == '1220',]$Temperatura = '73,5'
+summary(dados$Temperatura)
+```
+```{r}
+dados
+```
+```{r}
+#substituir valores faltantes na pela mediana 85
+dados[is.na(dados$Umidade),]$Umidade = median(dados$Umidade, na.rm = T)
+#substituir valor da umidade fora da faixa pela mediana 85
+dados[dados$Umidade == '200',]$Umidade = '85'
+```
+```{r}
+dados
+```
+```{r}
+#substituir valor faltante na pela moda F
+dados[is.na(dados$Vento),]$Vento = 'FALSO'
+```
+```{r}
+dados
+```
+ 
+ 

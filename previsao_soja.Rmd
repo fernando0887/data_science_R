@@ -1,0 +1,46 @@
+---
+title: Diagnóstico de doenças em plantações de soja
+autor: Fernando Schmitt
+---
+```{r}
+library(randomForest)
+library(caret)
+```
+Carregando os dados que serão trabalhados para pré visualização
+```{r}
+dados = read.csv('soybean.csv', sep = ',', stringsAsFactors = T)
+dim(dados)
+dados
+unique(dados$class)
+```
+Dividindo dados em treino e teste com semente para repetição dos resultados
+```{r}
+set.seed(123)
+part = createDataPartition(1:dim(dados)[1], p=.7)
+treino = dados[part$Resample1,]
+teste = dados[- part$Resample1,]
+dim(treino)
+dim(teste)
+```
+Construindo o modelo com os dados de treino usando Random Forests
+```{r}
+fl = randomForest(class ~ ., data = treino, ntree = 500, proximity = T)
+fl
+```
+Testando o modelo para previsão
+```{r}
+prev = predict(fl, teste)
+prev
+```
+Matriz de confusão
+```{r}
+fl$confusion
+```
+Precisão do modelo
+```{r}
+1 - mean(fl$confusion[,'class.error'])
+```
+
+
+
+

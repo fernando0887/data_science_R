@@ -1,0 +1,33 @@
+---
+title: Regressão linear
+Autor: Fernando Schmitt
+---
+
+carregando o arquivo a ser trabalhado
+```{r}
+dados = read.csv('slr12.csv', sep = ';')
+dados
+```
+obtendo informações sobre o arquivo
+```{r}
+summary(dados)
+```
+criando modelo de regressão
+```{r}
+modelo = lm(CusInic ~ FrqAnual, data = dados)
+modelo
+```
+representação grafica do modelo
+```{r}
+plot(CusInic ~ FrqAnual, data = dados)
+abline(modelo)
+```
+calculando custos com valores específicos
+```{r}
+custo = 1700
+valor = predict(modelo,data.frame(FrqAnual = custo))
+valor = paste0("O custo inical da Franquia será de R$", round(valor, 2))
+print(valor)
+```
+
+

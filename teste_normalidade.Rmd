@@ -1,0 +1,42 @@
+Semente para obter os mesmos resultados quando repetir o experimento
+```{r}
+set.seed(144)
+```
+Gerando 1000 variaveis normalmente distribuidas
+```{r}
+x = rnorm(1000)
+```
+grafico QQ (grafico de distribuiçao normal)
+```{r}
+#rodar com ctrl+shift+enter
+qqnorm(x)
+#gera a linha transversal
+qqline(x)
+```
+Teste de shapiro
+valor de p acima de 0,05, não há indicio para a não confirmação da hipotese nula de dados normalmente distribuidos
+```{r}
+shapiro.test(x)
+```
+Histograma com linha de densidade
+```{r}
+#rodar com ctrl shift enter
+hist(x , main = '')
+par(new = T)
+plot(density(x), ylab = '', xlab = '', axes = F, lwd = 2,5 )
+```
+dados não normalmente distribuidos
+```{r}
+#rodar com ctrl shift enter
+library('semTools')
+
+m = mvrnonnorm(1000, c(1,2), matrix(c(10,2,2,5),2,2), skewness = c(5,2), kurtosis = c(3,3))
+
+qqnorm(m)
+qqline(m)
+```
+Teste de shapiro
+```{r}
+shapiro.test(m)
+```
+

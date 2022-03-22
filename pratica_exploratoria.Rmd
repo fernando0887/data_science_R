@@ -1,0 +1,74 @@
+Explorando a relação de gastos do PIB e valores empenhados em diárias de munícipios do Rio Grande do Sul
+autor = Fernando Schmitt
+
+
+
+```{r}
+#Carregando o arquivo 
+dados = read.csv('dados.csv', sep = ';')
+dados
+```
+```{r}
+#obtendo os valores minimos,maximos,medios etc do conjnto de dados
+print('Valor PIB')
+summary(dados$PIB)
+print('Valor Empenho')
+summary(dados$VALOREMPENHO)
+```
+
+```{r}
+#Gerando graficos do pib e do valor de empenho
+boxplot(dados$PIB, main = 'PIB')
+boxplot(dados$VALOREMPENHO, main = 'Valor de Empenho')
+```
+
+
+```{r}
+#histograma do pib e valor de empenho
+hist(dados$PIB, main = 'PIB', xlab = 'PIB', ylab = 'Quantidade de municipios')
+hist(dados$VALOREMPENHO, main = 'Valor de Empenho', xlab = 'Empenho em diarias', ylab = 'Quantidade de municipios')
+
+```
+```{r}
+#retirando os outliers
+boxplot(dados$PIB, main = 'PIB', outline = F)
+hist(dados$PIB, main = 'PIB')
+```
+```{r}
+boxplot(dados$VALOREMPENHO, main = 'Valor de Empenho', outline = F)
+hist(dados$VALOREMPENHO, main = 'Valor de Empenho')
+```
+```{r}
+#tabela usando a biblioteca stargazer com a saida tipo texto
+library('stargazer')
+stargazer(dados, type = 'text')
+```
+```{r}
+#grafico de dipersão pib e empenho
+plot(dados$PIB, main = 'PIB', xlab = 'Quantidade de municipios', ylab = 'PIB')
+plot(dados$PIB, main = 'Valor de Empenho', xlab = 'Quantidade de municipios', ylab = 'PIB')
+```
+```{r}
+#busca maiores pib
+mpib = head(dados[order(-dados$PIB),],10)
+mpib
+barplot(mpib$PIB, main = 'Maiores PIB')
+legend('topright', legend = mpib$MUNICIPIO)
+```
+```{r}
+#busca maiores empenhos
+memp = head(dados[order(-dados$VALOREMPENHO),],10)
+memp
+barplot(memp$VALOREMPENHO, main = 'Valor Empenho')
+legend('topright', legend = memp$MUNICIPIO, cex = 0.5)
+```
+```{r}
+#comparando pib e empenho, valores percentuais
+dados$PROPORCAO = dados$VALOREMPENHO / dados$PIB
+dados$PROPORCAO
+emp_pib = head(dados[order(-dados$PROPORCAO),],20)
+emp_pib
+barplot(emp_pib$PROPORCAO, main = 'Proporção do PIB empenhado')
+legend('topright', legend = emp_pib$MUNICIPIO, cex = 0.5)
+```
+
